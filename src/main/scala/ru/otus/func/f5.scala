@@ -40,4 +40,21 @@ object f5 {
     }
 
   // TODO: def mapOption
+  def mapOption[T, R](o: Option[T])(f: T => R): Option[R] = {
+    o match {
+      case None        => None
+      case Some(value) => Some(f(value))
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val t = Some(1)
+    val n = None
+    val f = (n: Int) => { n + 1 }
+
+    val rT = mapOption(t)(f)
+    val rN = mapOption(n)(f)
+    println(s"mapOption Some [$rT]")
+    println(s"mapOption None [$rN]")
+  }
 }
